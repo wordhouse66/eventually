@@ -3,9 +3,9 @@
 <h1>Events</h1>
 <%= link_to 'Create an Event', new_event_path,
          :class=>"btn btn-default btn-primary" %>
-
+<% if Tag.all.length > 0 %>
 <%= render 'events/tag_cloud' %>
-
+<% end %>
 <table class=" table table-bordered">
   <thead>
     <tr>
