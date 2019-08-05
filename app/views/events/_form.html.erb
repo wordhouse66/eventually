@@ -1,0 +1,70 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div><br>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.text_field :start_date, placeholder: "Date and Time", class: 'form-control', id: 'flatpickr-input' %>
+  </div><br>
+
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.text_field :end_date, placeholder: "Date and Time", class: 'form-control', id: 'flatpickr-input'   %>
+  </div><br>
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      flatpickr('#flatpickr-input', {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+    })
+      
+    });
+  </script><br><br>
+
+  <div class="field">
+    <%= form.label :location %>
+    <%= form.text_field :location, class: 'form-control'  %>
+  </div><br>
+
+  <div class="field">
+    <%= form.label :agenda %>
+    <%= form.text_area :agenda, class: 'form-control'  %>
+  </div><br>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_area :address, class: 'form-control'  %>
+  </div><br>
+
+  <div class="hidden field">
+    <%= form.label :organizer_id %>
+    <%= form.number_field :organizer_id, value: current_user.id %>
+  </div><br>
+
+  <div class="field">
+    <%= form.label :all_tags, "List All Tags, separate each tag by a comma " %>
+    <%= form.text_field :all_tags, class: 'form-control'  %>
+  </div><br>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-primary'  %>
+  </div>
+<% end %>
+
+

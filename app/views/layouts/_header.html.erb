@@ -1,0 +1,66 @@
+<nav class="navbar navbar-default navbar-static-top col-lg-12 ">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display
+    -->
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" data-target="#main-nav" data-toggle="collapse" type="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Eventually", root_path, class: "navbar-brand", style: "color: blue;" %>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling
+    -->
+    <div class="collapse navbar-collapse" id="main-nav">
+      
+
+     
+        
+      <% if user_signed_in? %>
+      <ul class="nav navbar-nav navbar-right">
+       
+        <li><button style="margin: 10px;" class="btn btn-danger" type="submit"><i class="fa fa-search"></i><%= link_to "My Events", my_events_path, style: "color:white;"%></button> </li>
+        <li class="dropdown">
+<a style="color: blue;" class="dropdown-toggle" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Signed in as <%= current_user.email %><span class="caret"></span></a>
+            
+
+
+
+          
+
+
+
+
+
+          
+          <ul class="dropdown-menu">
+            
+          
+            <li><%= link_to "Edit Profile", edit_user_registration_path  %></li>
+            
+            <li><%= link_to "Log out.", destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+          
+        <li><%= link_to "Log out.", destroy_user_session_path, method: :delete, style:"color: white;" %></li>
+        
+      </ul>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          
+            <li><%= link_to "Sign Up", new_user_registration_path, style:"color: blue;"  %>
+          </li>
+          <li>
+            <%= link_to "Log in", new_user_session_path, style:"color: blue;"  %>
+          </li>
+        </ul>
+      <% end %>
+    
+    </div>
+  </div>
+</nav>
+
+
+

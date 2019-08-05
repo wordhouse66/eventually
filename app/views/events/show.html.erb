@@ -1,0 +1,99 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-md-3">
+<% if user_signed_in? && @event.organizer_id == current_user.id %>
+<label> <%= @pending_requests.length %> Join Requests</label>
+
+  <% if @pending_requests.present? %>
+    <% @pending_requests.each do |p| %>
+    <li><%= image_tag avatar_url(p.user), style: 'height: 30px; width: 30px;', class: 'thumbnail' %>
+    <%= p.user.email %>
+    <%= link_to 'Accept', accept_request_path(:event_id => @event.id, :attendance_id => p.id), :class => 'btn btn-success btn-small' %>
+    <%= link_to 'Reject', reject_request_path(:event_id => @event.id, :attendance_id => p.id), :class => "btn btn-danger btn-small"%></li>
+    <% end %>
+  <% else %>
+    <p>No Pending Requests for this event</p>
+  <% end %>
+<% end %>
+</div>
+
+<div class="col-md-6">
+
+<p>
+  <strong>Title:</strong>
+  <%= @event.title %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @event.start_date.strftime('%d/%m/%Y') %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @event.end_date.strftime('%d/%m/%Y') %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @event.location %>
+</p>
+
+<p>
+  <strong>Agenda:</strong>
+  <%= @event.agenda %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @event.address %>
+</p>
+
+<label>Organized By:</label><br/>
+         
+           <%= image_tag avatar_url(@event.organizer), style: 'height: 30px; width: 30px;', class: 'thumbnail'  %>
+           <%= @event.organizer.email %>
+         
+<br/>
+
+<p>
+  <strong>All Tags:</strong>
+  <%= @event.all_tags %>
+</p>
+
+<%= link_to 'Join', join_path(:event_id =>
+         @event.id), class: 'btn btn-info' %> 
+<% if current_user == @event.organizer %>
+<%= link_to 'Edit', edit_event_path(@event), class: 'btn btn-primary' %> |
+<% end %>
+<%= link_to 'Back', events_path, class: 'btn btn-danger' %>
+</div>
+
+
+<div class="col-md-3">
+
+
+<% if (@attendees.length > 1)%>
+  
+<label><%= @attendees.length %> Attendees</label>
+<% elsif @attendees.length == 1 %>
+
+<label><%= @attendees.length %> Attendant</label>
+<% else %>
+<label>No Attendants For This Event</label>
+<% end %>
+
+<% if current_user == @event.organizer %>
+<ul>
+  
+       <% @attendees.each do |a|%>
+         <li><%= image_tag avatar_url(a.user), style: 'height: 30px; width: 30px;', class: 'thumbnail' %>
+         <%= a.user.email %></li>
+       <%end%>
+     
+     </ul>
+     <% end %>
+</div></div>
+
+
