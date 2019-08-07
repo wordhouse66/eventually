@@ -1,5 +1,7 @@
 # README
 
+Eventually App helps users create events and those willing to attend can send a request to the event organizer who can also reject or accept the requests to the event.
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
